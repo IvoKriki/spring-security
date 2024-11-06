@@ -1,12 +1,21 @@
 services:
-  mysql:
-    image: mysql
+  postgres:
+    image: postgres
+    container_name: spring_security
     ports:
-      - "3306:3306"
-    expose:
-      - "3306"
+      - "5432:5432"
     environment:
-      - MYSQL_USER=admin
-      - MYSQL_PASSWORD=123
-      - MYSQL_DATABASE=mydb
-      - MYSQL_ROOT_PASSWORD=123
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=springsecuritydb
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: spring_security_pgadmin
+    ports:
+      - "8080:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    depends_on:
+      - postgres

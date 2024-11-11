@@ -15,9 +15,9 @@ public class AdminUserConfig implements CommandLineRunner {
 
     public static final String ADMIN = "admin";
     public static final String PASSWORD = "123";
-    private RoleRepository roleRepository;
-    private UserRepository userRepository;
-    private BCryptPasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     public AdminUserConfig(RoleRepository roleRepository,
                            UserRepository userRepository,

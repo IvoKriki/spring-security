@@ -1,6 +1,5 @@
 package com.ivokriki.spring.security.config;
 
-import com.ivokriki.spring.security.entities.Role;
 import com.ivokriki.spring.security.entities.User;
 import com.ivokriki.spring.security.repository.RoleRepository;
 import com.ivokriki.spring.security.repository.UserRepository;

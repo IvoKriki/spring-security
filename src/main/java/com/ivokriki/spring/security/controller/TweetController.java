@@ -43,7 +43,7 @@ public class TweetController {
 
         var isAdmin = user.get().getRoles().stream().anyMatch(role -> role.getName().equalsIgnoreCase(Role.Values.ADMIN.name()));
 
-        if (tweet.getUser().getUserId().equals(UUID.fromString(token.getName())))
+        if (isAdmin || tweet.getUser().getUserId().equals(UUID.fromString(token.getName())))
             tweetRepository.deleteById(tweetId);
         else
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();

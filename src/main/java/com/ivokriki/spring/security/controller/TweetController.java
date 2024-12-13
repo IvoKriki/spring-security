@@ -1,6 +1,7 @@
 package com.ivokriki.spring.security.controller;
 
 import com.ivokriki.spring.security.controller.dto.CreateTweetDto;
+import com.ivokriki.spring.security.entities.Role;
 import com.ivokriki.spring.security.entities.Tweet;
 import com.ivokriki.spring.security.repository.TweetRepository;
 import com.ivokriki.spring.security.repository.UserRepository;
@@ -37,7 +38,10 @@ public class TweetController {
 
     @DeleteMapping("/tweet/{id}")
     public ResponseEntity<Void> deleteTweet(@PathVariable("id") Long tweetId, JwtAuthenticationToken token){
+        var user = userRepository.findById(UUID.fromString(token.getName()));
         var tweet = tweetRepository.findById(tweetId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        var isAdmin = user.get().getRoles().stream().anyMatch(role -> role.getName().equalsIgnoreCase(Role.Values.ADMIN.name()));
 
         if (tweet.getUser().getUserId().equals(UUID.fromString(token.getName())))
             tweetRepository.deleteById(tweetId);
